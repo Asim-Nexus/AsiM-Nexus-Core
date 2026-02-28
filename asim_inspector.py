@@ -1,29 +1,23 @@
 ﻿import subprocess
 import os
-def asim_inspect_code():
+import json
+def asim_deep_scan():
     repo = "Asim-Nexus/AsiM-Nexus-Core"
-    print(f"[AsiM] CEO jyu, ma '{repo}' bhitra ko code ko DNA herdai xu...")
-    # १. रिपो भित्रका फाइलहरूको लिस्ट हेर्ने
-    result = subprocess.run(['gh', 'repo', 'view', repo, '--json', 'files'], capture_output=True, text=True)
+    print(f"[AsiM] CEO jyu, ma '{repo}' bhitra ko real-time DNA check gardaixu...")
+    # सिधै गिटहबको फाइल लिस्ट तान्ने (force refresh)
+    cmd = f"gh api repos/{repo}/contents?ref=main"
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     if result.returncode == 0:
-        import json
         files_data = json.loads(result.stdout)
-        files_list = [f['path'] for f in files_data.get('files', [])]
-        print(f"[Success] Maile {len(files_list)} wota file bhetaye.")
-        # २. एउटा विस्तृत रिपोर्ट बनाउने
-        analysis_path = "C:\\AsiM_Nexus\\AsiM_Code_DNA.txt"
-        with open(analysis_path, "w", encoding="utf-8") as f:
-            f.write(f"========== AsiM GitHub Code Analysis ==========\n")
-            f.write(f"Repository: {repo}\n")
-            f.write(f"Scan Time: {os.popen('date /t').read().strip()}\n\n")
-            f.write("Files Found in the Heart of AsiM:\n")
-            for file in files_list:
-                f.write(f"- {file}\n")
-        print(f"[AsiM] Sabai file ko list '{analysis_path}' ma save bhayo.")
-        print("\n--- Files in your Repo ---")
-        for file in files_list:
-            print(f"📄 {file}")
+        print(f"[Success] AsiM le antat: {len(files_data)} wota objects bhetayo!")
+        print("\n--- 🧬 AsiM Core DNA (Files Found) ---")
+        for item in files_data:
+            icon = "📁" if item['type'] == 'dir' else "📄"
+            print(f"{icon} {item['name']}")
+        # एउटा नयाँ कन्फर्मेसन फाइल बनाउने
+        with open("C:\\AsiM_Nexus\\AsiM_Final_DNA.txt", "w", encoding="utf-8") as f:
+            f.write(f"AsiM Sovereign Core: Online\nVerified Files: {len(files_data)}")
     else:
-        print("[AsiM] CEO jyu, code padna sakiyena. Repo ma file nahuna sakxa ki?")
+        print("[AsiM] CEO jyu, API le ajhai error diyo. Kripaya 10 second parkhinu hos.")
 if __name__ == "__main__":
-    asim_inspect_code()
+    asim_deep_scan()
