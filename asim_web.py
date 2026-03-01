@@ -1,0 +1,116 @@
+﻿import os
+import json
+import time
+import subprocess
+class AsiMGlassMaster:
+    def __init__(self):
+        self.dashboard_file = "C:\\AsiM_Nexus\\index.html"
+        print("--- [AsiM Glass-Core: Initializing Sci-Fi UI] ---")
+    def create_dashboard(self):
+        # १. एड्भान्स Glassmorphism UI संरचना
+        html_content = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>AsiM Nexus | Sovereign Terminal</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+            <style>
+                body {{
+                    background: radial-gradient(circle at center, #0a0f1e 0%, #000000 100%);
+                    font-family: 'Inter', sans-serif;
+                    overflow: hidden;
+                }}
+                .glass {{
+                    background: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(15px);
+                    -webkit-backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 20px;
+                }}
+                .glow-text {{
+                    text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+                    font-family: 'Orbitron', sans-serif;
+                }}
+                .scanner-line {{
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent, #00ffc8, transparent);
+                    animation: scan 3s linear infinite;
+                }}
+                @keyframes scan {{
+                    0% {{ transform: translateY(-100px); opacity: 0; }}
+                    50% {{ opacity: 1; }}
+                    100% {{ transform: translateY(600px); opacity: 0; }}
+                }}
+            </style>
+        </head>
+        <body class="text-gray-300 min-h-screen p-6 flex items-center justify-center">
+            <div class="scanner-line absolute w-full top-0 left-0 z-0"></div>
+            <div class="glass w-full max-w-6xl p-8 z-10 relative shadow-2xl overflow-hidden">
+                <div class="flex justify-between items-center border-b border-white/10 pb-6 mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold glow-text text-cyan-400">AsiM NEXUS v3.0</h1>
+                        <p class="text-xs tracking-widest uppercase opacity-50">Sovereign Artificial Intelligence System</p>
+                    </div>
+                    <div class="text-right">
+                        <div id="clock" class="text-2xl font-bold text-white">00:00:00</div>
+                        <p class="text-xs text-cyan-500 uppercase">Arjundhara, Nepal | Multi-Cloud Active</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass p-5 border-l-4 border-cyan-500">
+                        <h3 class="text-sm font-bold opacity-60 mb-2">CORE STATUS</h3>
+                        <p class="text-xl font-semibold">DESKTOP-P1C29FC</p>
+                        <p class="text-xs text-green-400">● 16GB RAM | RTX 2060</p>
+                    </div>
+                    <div class="glass p-5 border-l-4 border-purple-500">
+                        <h3 class="text-sm font-bold opacity-60 mb-2">CLOUD NODES</h3>
+                        <div class="flex space-x-2 text-xs">
+                            <span class="bg-blue-500/20 px-2 py-1 rounded">AWS S3</span>
+                            <span class="bg-blue-500/20 px-2 py-1 rounded">AZURE</span>
+                            <span class="bg-blue-500/20 px-2 py-1 rounded">GCP</span>
+                        </div>
+                    </div>
+                    <div class="glass p-5 border-l-4 border-orange-500">
+                        <h3 class="text-sm font-bold opacity-60 mb-2">AI MISSION</h3>
+                        <p class="text-xs italic">"Ensuring balance and peace for all living beings in the multiverse."</p>
+                    </div>
+                </div>
+                <div class="glass bg-black/40 p-6 font-mono text-sm h-64 overflow-y-auto mb-6 border border-white/5">
+                    <p class="text-cyan-400">[SYSTEM] Initializing Glass-Core UI...</p>
+                    <p class="text-gray-500">[{time.ctime()}] Authenticating CEO access...</p>
+                    <p class="text-gray-500">[{time.ctime()}] Multi-Agent collective: ONLINE</p>
+                    <p class="text-green-400">[SUCCESS] Deployment to GitHub completed.</p>
+                    <p class="animate-pulse text-white">_ Waiting for next command...</p>
+                </div>
+                <div class="flex justify-between items-center text-[10px] opacity-40 uppercase tracking-tighter">
+                    <span>Hardware Temp: 41°C | Healthy</span>
+                    <span>© 2026 AsiM System | Universal Encryption Active</span>
+                </div>
+            </div>
+            <script>
+                function updateClock() {{
+                    const now = new Date();
+                    document.getElementById('clock').innerText = now.toLocaleTimeString();
+                }}
+                setInterval(updateClock, 1000);
+                updateClock();
+            </script>
+        </body>
+        </html>
+        """
+        # २. फाइल सुरक्षित गर्ने
+        with open(self.dashboard_file, "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print(f"[Success] Glass UI Dashboard: {self.dashboard_file}")
+        # ३. गिटहब पब्लिश (Real-time Deployment)
+        print("[AsiM] Pushing to Global Cloud...")
+        subprocess.run(['git', 'add', '.'])
+        subprocess.run(['git', 'commit', '-m', "Upgrade: Glassmorphism UI v3.0 Deployment"])
+        subprocess.run(['git', 'push', 'origin', 'main'])
+        print("\n[AsiM Voice] CEO jyu, 'Babbal' UI tayar vayo! Aba GitHub Pages ma check garnus.")
+if __name__ == "__main__":
+    master = AsiMGlassMaster()
+    master.create_dashboard()
